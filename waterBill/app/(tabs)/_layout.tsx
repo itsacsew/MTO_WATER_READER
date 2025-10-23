@@ -7,6 +7,7 @@ const TabLayout = () => {
         <Tabs tabBar={props => <TabBar {...props} />}>
             <Tabs.Screen name="Reader" options={{ title: "Reader  " }} />
             <Tabs.Screen name="Database" options={{ title: "Database " }} />
+            <Tabs.Screen name="Import" options={{ title: "Import " }} />
             <Tabs.Screen name="Export" options={{ title: "Export " }} />
         </Tabs>
     )
