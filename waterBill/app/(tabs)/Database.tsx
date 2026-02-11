@@ -146,7 +146,14 @@ const Page = () => {
 
                         </View>
                         <View style={styles.actionsCell}>
+                            <TouchableOpacity
+                                style={styles.viewButton}
+                                onPress={() => handleViewDetails(consumer)}
+                            >
+                                <Text style={styles.viewButtonText}>View Details</Text>
+                            </TouchableOpacity>
                             {hasPaymentRecords(consumer) && (
+
                                 <TouchableOpacity
                                     style={styles.historyButton}
                                     onPress={() => handleViewPaymentHistory(consumer)}
@@ -296,6 +303,7 @@ const Page = () => {
             </Modal>
 
             {/* Payment History Modal */}
+            {/* Payment History Modal */}
             <Modal
                 visible={showPaymentHistoryModal}
                 transparent={true}
@@ -304,9 +312,18 @@ const Page = () => {
             >
                 <View style={styles.modalOverlay}>
                     <View style={[styles.modalContent, styles.historyModalContent]}>
-                        <Text style={styles.modalHeader}>
-                            Payment History - {selectedPaymentHistory[0]?.consumerName}
-                        </Text>
+                        {/* Header with Close Button */}
+                        <View style={styles.historyModalHeader}>
+                            <Text style={styles.modalHeader}>
+                                Payment History - {selectedPaymentHistory[0]?.consumerName}
+                            </Text>
+                            <TouchableOpacity
+                                style={styles.closeButton}
+                                onPress={() => setShowPaymentHistoryModal(false)}
+                            >
+                                <Text style={styles.closeButtonText}>X</Text>
+                            </TouchableOpacity>
+                        </View>
 
                         <ScrollView style={styles.historyScrollView} horizontal={true}>
                             <View>
@@ -347,13 +364,6 @@ const Page = () => {
                                 ))}
                             </View>
                         </ScrollView>
-
-                        <TouchableOpacity
-                            style={[styles.modalButton, styles.primaryButton]}
-                            onPress={() => setShowPaymentHistoryModal(false)}
-                        >
-                            <Text style={styles.primaryButtonText}>Close History</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -623,4 +633,24 @@ const styles = StyleSheet.create({
     historyTotalCell: { width: 70, alignItems: 'center' },
     historyStatusCell: { width: 60, alignItems: 'center' },
     historyDateCell: { width: 90, alignItems: 'center' },
+    // Close Button Styles for Payment History Modal
+    historyModalHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 15,
+    },
+    closeButton: {
+        backgroundColor: '#FF3B30',
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    closeButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
 })
